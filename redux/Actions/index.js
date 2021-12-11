@@ -1,11 +1,22 @@
-export const inputdata = user => {
-  return async dispatch => {
-    const api = await fetch(`https://api.github.com/users/${user}`);
-    const res = await api.json();
+import axios from "axios";
 
-    const repos = await fetch(`https://api.github.com/users/${user}/repos`);
-    const repo = await repos.json();
-    dispatch({ type: "USER", payload: res, user, repo });
-    // console.log("res", repo);
+
+export const userDatas = user => {
+  return async dispatch => {
+    axios.get(`https://api.github.com/users/${user}`).then((res) => {
+      console.log("user", res);
+      dispatch({ type: "USER_DATA", payload: res });
+    })
+
   };
 };
+export const userRepository = (user) => {
+  return async dispatch => {
+
+    axios.get(`https://api.github.com/users/${user}/repos`).then((res) => {
+      console.log("repo", res);
+      dispatch({ type: "USER_REPO", payload: res });
+    })
+
+  };
+}

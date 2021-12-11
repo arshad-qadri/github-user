@@ -1,17 +1,20 @@
 const intitialState = {
   user: null,
-  api: null,
   repos: null,
 };
 
 const userRed = (state = intitialState, action) => {
   switch (action.type) {
-    case "USER":
+    case "USER_DATA":
       return {
         ...state,
-        user: action.user,
-        api: action.payload,
-        repos: action.repo,
+        user: action.payload,
+        
+      };
+    case "USER_REPO":
+      return {
+        ...state,
+        repos: action.payload,
       };
     default:
       return state;
