@@ -1,6 +1,7 @@
 const intitialState = {
   user: null,
   repos: null,
+  error:null
 };
 
 const userRed = (state = intitialState, action) => {
@@ -8,14 +9,18 @@ const userRed = (state = intitialState, action) => {
     case "USER_DATA":
       return {
         ...state,
-        user: action.payload,
-        
+        user: action.payload,        
       };
+
     case "USER_REPO":
       return {
         ...state,
         repos: action.payload,
       };
+      // case "ERROR":
+      //   return{
+      //     error:action.payload
+      //   }
     default:
       return state;
   }
