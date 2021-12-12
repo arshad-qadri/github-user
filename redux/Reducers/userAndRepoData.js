@@ -9,18 +9,20 @@ const userRed = (state = intitialState, action) => {
     case "USER_DATA":
       return {
         ...state,
-        user: action.payload,        
+        user: action.payload,  
+        error:null      
       };
 
     case "USER_REPO":
       return {
         ...state,
         repos: action.payload,
+        error:null
       };
-      // case "ERROR":
-      //   return{
-      //     error:action.payload
-      //   }
+      case "ERROR":
+        return{
+          error:action.payload
+        }
     default:
       return state;
   }

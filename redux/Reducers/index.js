@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import userRed from "./fectchApiData";
+import userRed from "./userAndRepoData";
 
 const rootRducer = combineReducers({ userRed });
 
