@@ -1,6 +1,44 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userRepository } from "../redux/Actions";
 
 const Repository = ({ repo }) => {
+  const reposRef = useRef();
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userRed);
+
+  const handleScroll = () => {
+    const repositories = document.getElementById("repositories");
+    // console.log("repositories===", repositories);
+    // console.log("reposRef===", reposRef.current?.scrollTop);
+    const scrollTop = reposRef.current?.scrollTop;
+    const scrollHeight = reposRef.current?.scrollHeight;
+    const innerHeight = reposRef.current?.innerHeight;
+    console.log("innerHeight===", innerHeight);
+    try {
+      if (scrollTop + innerHeight + 1 >= scrollHeight) {
+        setPage((perv) => perv + 1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user?.data?.login && page > 1) {
+      dispatch(userRepository(user?.data?.login, page));
+    }
+    console.log("data", page);
+  }, [page]);
+
+  useEffect(() => {
+    const repositories = document.getElementById("repositories");
+    repositories.addEventListener("scroll", handleScroll);
+    return () => repositories.removeEventListener("scroll", handleScroll);
+    // repositories.
+  }, []);
   return (
     <>
       <div
@@ -9,6 +47,8 @@ const Repository = ({ repo }) => {
           overflow: "auto",
           padding: "10px 0",
         }}
+        id="repositories"
+        ref={reposRef}
       >
         {repo?.length > 0 ? (
           repo.map((item) => (
