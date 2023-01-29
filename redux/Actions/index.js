@@ -11,13 +11,17 @@ export const userDatas = user => {
 };
 
 export const userRepository = (user) => {
-  return async dispatch => {
-  await  axios.get(`https://api.github.com/users/${user}/repos`,{}).then((res) => {
-      dispatch({ type: "USER_REPO", payload: res });
-    }).catch((err)=>{
-      // console.log("err",err.response);
-      // dispatch({ type: "ERROR", payload: err.response.data });
-    })
-
+  // PAGINATION API
+  //api.github.com/users/arshad-qadri/repos?page=1&per_page=1
+  https: return async (dispatch) => {
+    await axios
+      .get(`https://api.github.com/users/${user}/repos?page=1&per_page=10`, {})
+      .then((res) => {
+        dispatch({ type: "USER_REPO", payload: res });
+      })
+      .catch((err) => {
+        // console.log("err",err.response);
+        // dispatch({ type: "ERROR", payload: err.response.data });
+      });
   };
 };
