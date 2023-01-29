@@ -3,9 +3,15 @@ import React from "react";
 const Repository = ({ repo }) => {
   return (
     <>
-      <div>
+      <div
+        style={{
+          height: "66vh",
+          overflow: "auto",
+          padding: "10px 0",
+        }}
+      >
         {repo?.length > 0 ? (
-          repo.map(item => (
+          repo.map((item) => (
             <div
               className="w-full bg-white mt-2 p-3 px-10 rounded-l shadow-sm hover:shadow-lg hover:border-green-500 "
               key={item.id}

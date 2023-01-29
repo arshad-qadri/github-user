@@ -27,16 +27,32 @@ function Home() {
 
         <div className="h-auto ">
           <Search setErrMsg={setErrMsg} />
-          {error ? <p className="w-full text-center font-bold text-lg">{error.message}</p> : <div className="container mx-auto ">
-            {!userData ?
-              <p className={`w-full text-center font-bold text-lg ${errMsg && "text-red-600"} `}> {errMsg ? errMsg :" Please search the user"}</p>
-              :
-              <div className={style.grids}>                
-                <Profile userData={userData} />                
-                <Repository repo={repo}/>
-              </div>
-            }
-          </div>}
+          {error ? (
+            <p className="w-full text-center font-bold text-lg">
+              {error.message}
+            </p>
+          ) : (
+            <div className="container mx-auto ">
+              {!userData ? (
+                <p
+                  className={`w-full text-center font-bold text-lg ${
+                    errMsg && "text-red-600"
+                  } `}
+                >
+                  {" "}
+                  {errMsg ? errMsg : " Please search the user"}
+                </p>
+              ) : (
+                <div
+                  className={style.grids}
+                 
+                >
+                  <Profile userData={userData} />
+                  <Repository repo={repo} />
+                </div>
+              )}
+            </div>
+          )}
         </div>
         <br />
         <br />
