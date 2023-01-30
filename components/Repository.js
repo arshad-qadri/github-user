@@ -10,15 +10,11 @@ const Repository = ({ repo }) => {
   const { user } = useSelector((state) => state.userRed);
 
   const handleScroll = () => {
-    const repositories = document.getElementById("repositories");
-    // console.log("repositories===", repositories);
-    // console.log("reposRef===", reposRef.current?.scrollTop);
     const scrollTop = reposRef.current?.scrollTop;
     const scrollHeight = reposRef.current?.scrollHeight;
-    const innerHeight = reposRef.current?.innerHeight;
-    console.log("innerHeight===", innerHeight);
+    const clientHeight = reposRef?.current?.clientHeight;
     try {
-      if (scrollTop + innerHeight + 1 >= scrollHeight) {
+      if (scrollTop + clientHeight >= scrollHeight) {
         setPage((perv) => perv + 1);
       }
     } catch (error) {
@@ -30,15 +26,16 @@ const Repository = ({ repo }) => {
     if (user?.data?.login && page > 1) {
       dispatch(userRepository(user?.data?.login, page));
     }
-    console.log("data", page);
   }, [page]);
 
   useEffect(() => {
-    const repositories = document.getElementById("repositories");
-    repositories.addEventListener("scroll", handleScroll);
-    return () => repositories.removeEventListener("scroll", handleScroll);
+    if (repo?.length < user?.data?.public_repos) {
+      const repositories = document.getElementById("repositories");
+      repositories.addEventListener("scroll", handleScroll);
+      return () => repositories.removeEventListener("scroll", handleScroll);
+    }
     // repositories.
-  }, []);
+  }, [repo.length]);
   return (
     <>
       <div

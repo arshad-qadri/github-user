@@ -10,4 +10,7 @@
     grid-template-columns: 90%;
     justify-content: center;
   }
+  .profile {
+    display: none;
+  }
 }

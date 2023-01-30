@@ -1,28 +1,29 @@
 const intitialState = {
   user: null,
-  repos: null,
-  error:null
+  repos: [],
+  error: null,
 };
 
 const userRed = (state = intitialState, action) => {
+  // console.log("action.payload===", action.payload?.data);
   switch (action.type) {
     case "USER_DATA":
       return {
         ...state,
-        user: action.payload,  
-        error:null      
+        user: action.payload,
+        error: null,
       };
 
     case "USER_REPO":
       return {
         ...state,
-        repos: action.payload,
-        error:null
+        repos: [...state.repos, ...action.payload.data],
+        error: null,
       };
-      case "ERROR":
-        return{
-          error:action.payload
-        }
+    case "ERROR":
+      return {
+        error: action.payload,
+      };
     default:
       return state;
   }

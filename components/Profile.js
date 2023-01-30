@@ -1,11 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import style from "../styles/Home.module.css";
 
 const Profile = ({ userData }) => {
   return (
     <>
       <div
-        className=" bg-white shadow-md rounded mx-auto p-6 mt-2"
+        className={`bg-white shadow-md rounded mx-auto p-6 mt-2 ${style.profile}`}
         style={{ height: "32rem" }}
       >
         <Image

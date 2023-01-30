@@ -6,15 +6,12 @@ import Profile from "../components/Profile";
 import Repository from "../components/Repository";
 import Search from "../components/Search";
 
-
 function Home() {
-  const userData = useSelector(state => state.userRed.user?.data);
-  const repo = useSelector(state => state.userRed.repos?.data);
-  const error = useSelector(state => state.userRed.error);
+  const userData = useSelector((state) => state.userRed.user?.data);
+  const repo = useSelector((state) => state.userRed.repos);
+  const error = useSelector((state) => state.userRed.error);
   const [errMsg, setErrMsg] = useState("");
 
-
- 
   return (
     <>
       <Head>
@@ -43,10 +40,7 @@ function Home() {
                   {errMsg ? errMsg : " Please search the user"}
                 </p>
               ) : (
-                <div
-                  className={style.grids}
-                 
-                >
+                <div className={style.grids}>
                   <Profile userData={userData} />
                   <Repository repo={repo} />
                 </div>
@@ -65,4 +59,3 @@ function Home() {
   );
 }
 export default Home;
-
