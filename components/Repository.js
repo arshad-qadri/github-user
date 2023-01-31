@@ -35,7 +35,7 @@ const Repository = ({ repo }) => {
       return () => repositories.removeEventListener("scroll", handleScroll);
     }
     // repositories.
-  }, [repo.length]);
+  }, [repo?.length]);
   return (
     <>
       <div

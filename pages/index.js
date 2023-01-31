@@ -37,7 +37,7 @@ function Home() {
                   } `}
                 >
                   {" "}
-                  {errMsg ? errMsg : " Please search the user"}
+                  {errMsg ? errMsg : " Please search the user."}
                 </p>
               ) : (
                 <div className={style.grids}>
